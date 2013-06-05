@@ -1,5 +1,21 @@
 {
-  "name": "package",
+  "name": "<%= _.slugify(appname) %>",
   "version": "0.0.0",
-  "dependencies": {}
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.2.3",
+    "ejs": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.2.0",
+    "grunt-contrib-jshint": "~0.4.3",
+    "matchdep": "~0.1.2"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  }
 }

@@ -3,8 +3,9 @@ var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
 
+module.exports = Generator;
 
-var BbeGenerator = module.exports = function BbeGenerator(args, options, config) {
+function Generator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
   this.on('end', function () {
@@ -14,9 +15,9 @@ var BbeGenerator = module.exports = function BbeGenerator(args, options, config)
   this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
 };
 
-util.inherits(BbeGenerator, yeoman.generators.Base);
+util.inherits(Generator, yeoman.generators.Base);
 
-BbeGenerator.prototype.askFor = function askFor() {
+Generator.prototype.askFor = function askFor() {
   var cb = this.async();
 
   // welcome message
@@ -34,10 +35,10 @@ BbeGenerator.prototype.askFor = function askFor() {
   console.log(welcome);
 
   var prompts = [{
-    name: 'someOption',
-    message: 'Would you like to enable this option?',
+    name: 'ready',
+    message: 'Are you ready?',
     default: 'Y/n',
-    warning: 'Yes: Enabling this will be totally awesome!'
+    warning: 'Are you sure?'
   }];
 
   this.prompt(prompts, function (err, props) {
@@ -45,21 +46,48 @@ BbeGenerator.prototype.askFor = function askFor() {
       return this.emit('error', err);
     }
 
-    this.someOption = (/y/i).test(props.someOption);
+    this.ready = (/y/i).test(props.ready);
 
     cb();
   }.bind(this));
 };
 
-BbeGenerator.prototype.app = function app() {
-  this.mkdir('app');
-  this.mkdir('app/templates');
-
-  this.copy('_package.json', 'package.json');
-  this.copy('_bower.json', 'bower.json');
+Generator.prototype.scaffolding = function scaffolding() {
+  this.mkdir('public');
+  this.mkdir('public/css');
+  this.mkdir('public/img');
+  this.mkdir('public/js');
+  this.mkdir('public/js/vendor');
+  this.copy('app.js', 'app.js');
 };
 
-BbeGenerator.prototype.projectfiles = function projectfiles() {
-  this.copy('editorconfig', '.editorconfig');
+Generator.prototype.baseFiles = function baseFiles() {
+  this.copy('index.html', 'public/index.html');
+  this.copy('main.js', 'public/main.js');
+  this.write('public/css/main.css', 'html {\n  background: #f0f2f4;\n}');
+};
+
+Generator.prototype.git = function git() {
+  this.copy('gitignore', '.gitignore');
+};
+
+Generator.prototype.bower = function bower() {
+  this.copy('bowerrc', '.bowerrc');
+  this.template('_bower.json', 'bower.json');
+};
+
+Generator.prototype.jshint = function jshint() {
   this.copy('jshintrc', '.jshintrc');
+};
+
+Generator.prototype.editorConfig = function editorConfig() {
+  this.copy('editorconfig', '.editorconfig');
+};
+
+Generator.prototype.grunt = function grunt() {
+  this.template('Gruntfile.js', 'Gruntfile.js');
+};
+
+Generator.prototype.packageJSON = function packageJSON() {
+  this.template('_package.json', 'package.json');
 };
