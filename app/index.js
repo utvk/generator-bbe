@@ -57,7 +57,6 @@ Generator.prototype.scaffolding = function scaffolding() {
   this.mkdir('public/css');
   this.mkdir('public/img');
   this.mkdir('public/js');
-  this.mkdir('public/js/vendor');
   this.copy('app.js', 'app.js');
 };
 

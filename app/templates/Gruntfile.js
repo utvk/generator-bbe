@@ -50,6 +50,9 @@ module.exports = function(grunt) {
         options: {
           baseUrl: 'public/js',
           optimize: 'none',
+          paths: {
+            'templates': 'templates'
+          },
           preserveLicenseComments: false,
           useStrict: true,
           wrap: true
@@ -78,10 +81,6 @@ module.exports = function(grunt) {
     },
     htmlmin: {
       dist: {
-        options: {
-          // removeComments: true,
-          // collapseWhitespace: true
-        },
         files: [{
           expand: true,
           cwd: 'public',
@@ -111,16 +110,28 @@ module.exports = function(grunt) {
             'img/{,*/}*.{webp,gif}'
           ],
           dest: 'dist/public'
-        }, {
+        },
+        {
           expand: true,
           src: ['app.js'],
           dest: 'dist'
         }]
       }
+    },
+    jst: {
+      options: {
+        amd: true
+      },
+      compile: {
+        files: {
+          'public/js/templates.js': ['public/js/templates/*.ejs']
+        }
+      }
     }
   });
 
   grunt.registerTask('build', [
+    'jst',
     'useminPrepare',
     'requirejs',
     'imagemin',
@@ -133,6 +144,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('server', [
+    'jst',
     'express:dev',
     'watch'
   ]);
