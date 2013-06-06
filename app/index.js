@@ -63,7 +63,7 @@ Generator.prototype.scaffolding = function scaffolding() {
 
 Generator.prototype.baseFiles = function baseFiles() {
   this.copy('index.html', 'public/index.html');
-  this.copy('main.js', 'public/main.js');
+  this.copy('main.js', 'public/js/main.js');
   this.write('public/css/main.css', 'html {\n  background: #f0f2f4;\n}');
 };
 

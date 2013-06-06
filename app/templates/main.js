@@ -11,12 +11,12 @@ require.config({
         'jquery'
       ],
       exports: 'Backbone'
-    },
+    }
   },
   paths: {
     jquery: '../components/jquery/jquery',
     backbone: '../components/backbone-amd/backbone',
-    underscore: '../components/underscore-amd/underscore',
+    underscore: '../components/underscore-amd/underscore'
   }
 });
 
