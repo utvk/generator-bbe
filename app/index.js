@@ -7,6 +7,14 @@ var yeoman = require('yeoman-generator');
 var Generator = module.exports = function Generator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
+  this.testFramework = options['test-framework'] || 'mocha';
+
+  if (!options['test-framework']) {
+    options['test-framework'] = 'mocha';
+  }
+
+  this.hookFor('test-framework', { as: 'app' });
+
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] });
   });

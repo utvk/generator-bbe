@@ -9,5 +9,11 @@ A generator for Yeoman.
 - Install the generator: `npm install -g generator-bbe`
 - Run: `yo bbe`
 
+## Options
+- `--skip-install`
+  Skips the automatic execution of `bower` and `npm` after scaffolding has finished.
+- `--test-framework=[framework]`
+  Defaults to `mocha`. Can be switched for another supported testing framework like `jasmine`.
+
 ## License
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
