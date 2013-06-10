@@ -25,6 +25,14 @@ module.exports = function(grunt) {
         }
       }
     },
+    connect: {
+      test: {
+        options: {
+          port: 1337,
+          base: 'test'
+        }
+      }
+    },
     watch: {
       express: {
         files: [
@@ -127,6 +135,14 @@ module.exports = function(grunt) {
           'public/js/templates.js': ['public/js/templates/*.ejs']
         }
       }
+    },
+    mocha: {
+      all: {
+        options: {
+          run: true,
+          urls: ['http://localhost:<%%= connect.test.options.port %>/index.html']
+        }
+      }
     }
   });
 
@@ -147,6 +163,11 @@ module.exports = function(grunt) {
     'jst',
     'express:dev',
     'watch'
+  ]);
+
+  grunt.registerTask('test', [
+    'connect:test',
+    'mocha'
   ]);
 
   grunt.registerTask('default', [
