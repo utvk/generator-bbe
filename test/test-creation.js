@@ -13,7 +13,10 @@ describe('bbe generator', function () {
       }
 
       this.app = helpers.createGenerator('bbe:app', [
-        '../../app'
+        '../../app', [
+          helpers.createDummyGenerator(),
+          'mocha:app'
+        ]
       ]);
       done();
     }.bind(this));
@@ -27,7 +30,7 @@ describe('bbe generator', function () {
     ];
 
     helpers.mockPrompt(this.app, {
-      'someOption': 'Y'
+      'ready': 'Y'
     });
     this.app.options['skip-install'] = true;
     this.app.run({}, function () {
