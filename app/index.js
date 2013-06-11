@@ -40,10 +40,9 @@ Generator.prototype.askFor = function askFor() {
   console.log(welcome);
 
   var prompts = [{
-    name: 'ready',
-    message: 'Are you ready?',
-    default: 'Y/n',
-    warning: 'Are you sure?'
+    name: 'expressFileName',
+    message: 'What would you like to name your main express file?',
+    'default': 'app or server'
   }];
 
   this.prompt(prompts, function (err, props) {
@@ -51,7 +50,7 @@ Generator.prototype.askFor = function askFor() {
       return this.emit('error', err);
     }
 
-    this.ready = (/y/i).test(props.ready);
+    this.expressFileName = props.expressFileName;
 
     cb();
   }.bind(this));
@@ -62,7 +61,7 @@ Generator.prototype.scaffolding = function scaffolding() {
   this.mkdir('public/css');
   this.mkdir('public/img');
   this.mkdir('public/js');
-  this.copy('app.js', 'app.js');
+  this.copy('app.js', this.expressFileName + '.js');
 };
 
 Generator.prototype.baseFiles = function baseFiles() {
@@ -89,7 +88,7 @@ Generator.prototype.editorConfig = function editorConfig() {
 };
 
 Generator.prototype.grunt = function grunt() {
-  this.template('Gruntfile.js', 'Gruntfile.js');
+  this.template('_Gruntfile.js', 'Gruntfile.js');
 };
 
 Generator.prototype.packageJSON = function packageJSON() {

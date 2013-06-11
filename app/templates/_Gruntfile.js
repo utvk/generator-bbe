@@ -21,7 +21,7 @@ module.exports = function(grunt) {
       },
       dev: {
         options: {
-          script: 'app.js'
+          script: '<%= expressFileName %>.js'
         }
       }
     },
@@ -36,6 +36,7 @@ module.exports = function(grunt) {
     watch: {
       express: {
         files: [
+          '<%= expressFileName %>.js',
           'public/js/{,*/}*.js'
         ],
         tasks: ['express:dev'],
@@ -121,7 +122,7 @@ module.exports = function(grunt) {
         },
         {
           expand: true,
-          src: ['app.js'],
+          src: ['<%= expressFileName %>.js'],
           dest: 'dist'
         }]
       }
