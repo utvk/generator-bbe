@@ -9,7 +9,31 @@ var ViewGenerator = module.exports = function ViewGenerator(args, options, confi
 
 util.inherits(ViewGenerator, yeoman.generators.NamedBase);
 
+ViewGenerator.prototype.askFor = function askFor() {
+  var cb = this.async();
+
+  var prompts = [{
+    name: 'includeTemplateFile',
+    message: 'Would you like to include a template file?',
+    default: 'Y/n',
+    warning: 'Yes: a template file will be placed into the templates directory.'
+  }];
+
+  this.prompt(prompts, function(err, props) {
+    if (err) {
+      return this.emit('error', err);
+    }
+
+    this.includeTemplateFile = (/y/i).test(props.includeTemplateFile);
+
+    cb();
+  }.bind(this));
+};
+
 ViewGenerator.prototype.files = function files() {
   this.template('_view.js', 'public/js/views/' + this.name + '-view.js');
-  this.write('public/js/templates/' + this.name + '.ejs', '<p>Your content here.</p>\n');
+
+  if (this.includeTemplateFile) {
+    this.write('public/js/templates/' + this.name + '.ejs', '<p>Your content here.</p>\n');
+  }
 };
