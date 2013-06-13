@@ -43,6 +43,11 @@ Generator.prototype.askFor = function askFor() {
     name: 'expressFileName',
     message: 'What would you like to name your main express file?',
     'default': 'app or server'
+  }, {
+    name: 'includeBackboneRelational',
+    message: 'Would you like to include Backbone-Relational?',
+    default: 'Y/n',
+    warning: 'Yes: Backbone-Relational will be placed into the bower components directory.'
   }];
 
   this.prompt(prompts, function (err, props) {
@@ -51,6 +56,7 @@ Generator.prototype.askFor = function askFor() {
     }
 
     this.expressFileName = props.expressFileName;
+    this.includeBackboneRelational = (/y/i).test(props.includeBackboneRelational);
 
     cb();
   }.bind(this));
@@ -66,7 +72,7 @@ Generator.prototype.scaffolding = function scaffolding() {
 
 Generator.prototype.baseFiles = function baseFiles() {
   this.copy('index.html', 'public/index.html');
-  this.copy('main.js', 'public/js/main.js');
+  this.template('_main.js', 'public/js/main.js');
   this.write('public/css/main.css', 'html {\n  background: #f0f2f4;\n}');
 };
 

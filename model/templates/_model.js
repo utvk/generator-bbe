@@ -1,13 +1,18 @@
 define([
   'underscore',
-  'backbone'
+  'backbone'<% if (includeBackboneRelational) { %>,
+  'backbone-relational'<% } %>
 ], function (_, Backbone) {
   'use strict';
 
-  var <%= _.classify(name) %>Model = Backbone.Model.extend({
+  var <%= _.classify(name) %>Model = Backbone.<% if (includeBackboneRelational) { %>Relational<% } %>Model.extend({
     defaults: {
 
-    }
+    }<% if (includeBackboneRelational) { %>,
+
+    relations: [{
+
+    }]<% } %>
   });
 
   return <%= _.classify(name) %>Model;

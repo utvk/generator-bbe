@@ -4,7 +4,8 @@
   "dependencies": {
     "jquery": "~1.9.0",
     "requirejs": "~2.1.5",
-    "backbone-amd": "~1.0.0",
+    "backbone-amd": "~1.0.0",<% if (includeBackboneRelational) { %>
+    "backbone-relational": "~0.8.5",<% } %>
     "underscore-amd": "~1.4.4",
     "modernizr": "~2.6.2"
   },
