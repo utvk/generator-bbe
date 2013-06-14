@@ -7,7 +7,7 @@ define([
   var <%= _.classify(name) %>Router = Backbone.Router.extend({
     routes: {
 
-    },
+    }
   });
 
   return <%= _.classify(name) %>Router;

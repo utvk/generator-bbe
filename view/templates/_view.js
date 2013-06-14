@@ -3,7 +3,7 @@ define([
   'underscore',
   'backbone'<% if (includeTemplateFile) { %>,
   'templates'<% } %>
-], function ($, _, Backbone, JST) {
+], function ($, _, Backbone<% if (includeTemplateFile) { %>, JST<% } %>) {
   'use strict';
 
   var <%= _.classify(name) %>View = Backbone.View.extend({
