@@ -52,7 +52,37 @@ module.exports = function(grunt) {
         options: {
           livereload: true
         }
+      },
+      compass: {
+        files: ['public/sass/{,*/}*.{scss,sass}'],
+        tasks: ['compass:dev']
       }
+    },
+    compass: {
+      options: {
+        sassDir: 'public/sass',
+        cssDir: 'public/css',
+        imagesDir: 'public/img',
+        javascriptsDir: 'public/js',
+        fontsDir: 'public/fonts',
+        importPath: 'public',
+        relativeAssets: true
+      },
+      dev: {
+        options: {
+          debugInfo: true,
+          environment: 'development'
+        }
+      },
+      dist: {
+        options: {
+          environment: 'production'
+        }
+      }
+    },
+    clean: {
+      dev: ['public/css', 'public/js/templates.js'],
+      dist: ['public/css', 'public/js/templates.js', 'dist/*']
     },
     requirejs: {
       dist: {
@@ -148,7 +178,9 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build', [
+    'clean:dist',
     'jst',
+    'compass:dist',
     'useminPrepare',
     'requirejs',
     'imagemin',
@@ -161,7 +193,9 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('server', [
+    'clean:dev',
     'jst',
+    'compass:dev',
     'express:dev',
     'watch'
   ]);

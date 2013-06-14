@@ -64,16 +64,14 @@ Generator.prototype.askFor = function askFor() {
 
 Generator.prototype.scaffolding = function scaffolding() {
   this.mkdir('public');
-  this.mkdir('public/css');
   this.mkdir('public/img');
-  this.mkdir('public/js');
   this.copy('app.js', this.expressFileName + '.js');
 };
 
 Generator.prototype.baseFiles = function baseFiles() {
   this.copy('index.html', 'public/index.html');
   this.template('_main.js', 'public/js/main.js');
-  this.write('public/css/main.css', 'html {\n  background: #f0f2f4;\n}');
+  this.write('public/sass/main.scss', '@import "components/sass-bootstrap/lib/bootstrap";');
 };
 
 Generator.prototype.git = function git() {
