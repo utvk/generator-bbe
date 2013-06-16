@@ -49,6 +49,7 @@ module.exports = function(grunt) {
           'public/*.html',
           'public/css/*.css',
           'public/js/{,*/}*.js',
+          'public/js/templates.js',
           'public/img/{,*/}*.{png,jpg,jpeg,gif,webp}'
         ],
         options: {
@@ -58,6 +59,10 @@ module.exports = function(grunt) {
       compass: {
         files: ['public/sass/{,*/}*.{scss,sass}'],
         tasks: ['compass:dev']
+      },
+      jst: {
+        files: ['public/js/templates/{,*/}*.ejs'],
+        tasks: ['jst']
       }
     },
     compass: {
