@@ -1,9 +1,15 @@
 {
   "name": "generator-bbe",
-  "version": "0.0.0",
-  "description": "A generator for Yeoman",
+  "version": "0.0.1",
+  "description": "Yeoman generator for Backbone and Express",
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "scaffold",
+    "framework",
+    "mvc",
+    "backbone",
+    "express",
+    "node"
   ],
   "homepage": "https://github.com/nathanstaines/generator-bbe",
   "bugs": "https://github.com/nathanstaines/generator-bbe/issues",
@@ -21,7 +27,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "yeoman-generator": "~0.10.2"
+    "yeoman-generator": "~0.10.3"
   },
   "devDependencies": {
     "mocha": "~1.9.0"

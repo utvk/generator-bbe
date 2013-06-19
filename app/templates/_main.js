@@ -11,6 +11,10 @@ require.config({
         'jquery'
       ],
       exports: 'Backbone'
+    },
+    bootstrap: {
+      deps: ['jquery'],
+      exports: 'jquery'
     }<% if (includeBackboneRelational) { %>,
     'backbone-relational': ['backbone']<% } %>
   },
@@ -20,12 +24,14 @@ require.config({
     'underscore': '../components/underscore/underscore',
     'backbone-relational': '../components/backbone-relational/backbone-relational'<% }else{ %>
     'backbone': '../components/backbone-amd/backbone',
-    'underscore': '../components/underscore-amd/underscore'<% } %>
+    'underscore': '../components/underscore-amd/underscore'<% } %>,
+    'bootstrap': '../components/sass-bootstrap/docs/assets/js/bootstrap'
   }
 });
 
 require([
-  'backbone'
+  'backbone',
+  'bootstrap'
 ], function (Backbone) {
   Backbone.history.start();
 });

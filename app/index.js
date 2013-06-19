@@ -7,13 +7,8 @@ var yeoman = require('yeoman-generator');
 var Generator = module.exports = function Generator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
-  this.testFramework = options['test-framework'] || 'mocha';
-
-  if (!options['test-framework']) {
-    options['test-framework'] = 'mocha';
-  }
-
-  this.hookFor('test-framework', { as: 'app' });
+  this.testFramework = this.options['test-framework'] || 'mocha';
+  this.hookFor(this.testFramework, { as: 'app' });
 
   this.on('end', function () {
     this.installDependencies({ skipInstall: options['skip-install'] });
@@ -25,19 +20,7 @@ util.inherits(Generator, yeoman.generators.Base);
 Generator.prototype.askFor = function askFor() {
   var cb = this.async();
 
-  // welcome message
-  var welcome =
-  '\n     _-----_' +
-  '\n    |       |' +
-  '\n    |' + '--(o)--'.red + '|   .--------------------------.' +
-  '\n   `---------´  |    ' + 'Welcome to Yeoman,'.yellow.bold + '    |' +
-  '\n    ' + '( '.yellow + '_' + '´U`'.yellow + '_' + ' )'.yellow + '   |   ' + 'ladies and gentlemen!'.yellow.bold + '  |' +
-  '\n    /___A___\\   \'__________________________\'' +
-  '\n     |  ~  |'.yellow +
-  '\n   __' + '\'.___.\''.yellow + '__' +
-  '\n ´   ' + '`  |'.red + '° ' + '´ Y'.red + ' `\n';
-
-  console.log(welcome);
+  console.log(this.yeoman);
 
   var prompts = [{
     name: 'expressFileName',
@@ -60,18 +43,6 @@ Generator.prototype.askFor = function askFor() {
 
     cb();
   }.bind(this));
-};
-
-Generator.prototype.scaffolding = function scaffolding() {
-  this.mkdir('public');
-  this.mkdir('public/img');
-  this.copy('app.js', this.expressFileName + '.js');
-};
-
-Generator.prototype.baseFiles = function baseFiles() {
-  this.copy('index.html', 'public/index.html');
-  this.template('_main.js', 'public/js/main.js');
-  this.write('public/sass/main.scss', '@import "components/sass-bootstrap/lib/bootstrap";');
 };
 
 Generator.prototype.git = function git() {
@@ -97,4 +68,16 @@ Generator.prototype.grunt = function grunt() {
 
 Generator.prototype.packageJSON = function packageJSON() {
   this.template('_package.json', 'package.json');
+};
+
+Generator.prototype.scaffolding = function scaffolding() {
+  this.mkdir('public');
+  this.mkdir('public/img');
+  this.copy('app.js', this.expressFileName + '.js');
+};
+
+Generator.prototype.baseFiles = function baseFiles() {
+  this.template('_index.html', 'public/index.html');
+  this.template('_main.js', 'public/js/main.js');
+  this.write('public/sass/main.scss', '@import "components/sass-bootstrap/lib/bootstrap";\n\n.hero-unit {\n  margin: 50px auto 0;\n  width: 300px;\n}\n');
 };
