@@ -3,7 +3,7 @@
 
 var path    = require('path');
 var helpers = require('yeoman-generator').test;
-
+var assert  = require('assert');
 
 describe('bbe generator', function () {
   beforeEach(function (done) {
@@ -18,6 +18,14 @@ describe('bbe generator', function () {
           'mocha:app'
         ]
       ]);
+
+      this.app.options['skip-install'] = true;
+
+      helpers.mockPrompt(this.app, {
+        'expressFileName': 'app',
+        'includeBackboneRelational': 'Y'
+      });
+
       done();
     }.bind(this));
   });
@@ -29,10 +37,6 @@ describe('bbe generator', function () {
       '.editorconfig'
     ];
 
-    helpers.mockPrompt(this.app, {
-      'ready': 'Y'
-    });
-    this.app.options['skip-install'] = true;
     this.app.run({}, function () {
       helpers.assertFiles(expected);
       done();
