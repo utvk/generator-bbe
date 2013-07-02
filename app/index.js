@@ -33,11 +33,7 @@ Generator.prototype.askFor = function askFor() {
     warning: 'Yes: Backbone-Relational will be placed into the bower components directory.'
   }];
 
-  this.prompt(prompts, function (err, props) {
-    if (err) {
-      return this.emit('error', err);
-    }
-
+  this.prompt(prompts, function (props) {
     this.expressFileName = props.expressFileName;
     this.includeBackboneRelational = (/y/i).test(props.includeBackboneRelational);
 
