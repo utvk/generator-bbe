@@ -32,6 +32,6 @@ require.config({
 require([
   'backbone',
   'bootstrap'
-], function (Backbone) {
+], function(Backbone) {
   Backbone.history.start();
 });

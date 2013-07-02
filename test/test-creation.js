@@ -5,9 +5,9 @@ var path    = require('path');
 var helpers = require('yeoman-generator').test;
 var assert  = require('assert');
 
-describe('bbe generator', function () {
-  beforeEach(function (done) {
-    helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+describe('bbe generator', function() {
+  beforeEach(function(done) {
+    helpers.testDirectory(path.join(__dirname, 'temp'), function(err) {
       if (err) {
         return done(err);
       }
@@ -30,14 +30,14 @@ describe('bbe generator', function () {
     }.bind(this));
   });
 
-  it('creates expected files', function (done) {
+  it('creates expected files', function(done) {
     var expected = [
       // add files you expect to exist here.
       '.jshintrc',
       '.editorconfig'
     ];
 
-    this.app.run({}, function () {
+    this.app.run({}, function() {
       helpers.assertFiles(expected);
       done();
     });

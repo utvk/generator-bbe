@@ -1,7 +1,7 @@
 define([
   'jquery',
   'backbone'
-], function ($, Backbone) {
+], function($, Backbone) {
   'use strict';
 
   var <%= _.classify(name) %>Router = Backbone.Router.extend({

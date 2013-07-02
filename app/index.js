@@ -10,7 +10,7 @@ var Generator = module.exports = function Generator(args, options, config) {
   this.testFramework = this.options['test-framework'] || 'mocha';
   this.hookFor(this.testFramework, { as: 'app' });
 
-  this.on('end', function () {
+  this.on('end', function() {
     this.installDependencies({ skipInstall: options['skip-install'] });
   });
 };
@@ -33,7 +33,7 @@ Generator.prototype.askFor = function askFor() {
     warning: 'Yes: Backbone-Relational will be placed into the bower components directory.'
   }];
 
-  this.prompt(prompts, function (props) {
+  this.prompt(prompts, function(props) {
     this.expressFileName = props.expressFileName;
     this.includeBackboneRelational = (/y/i).test(props.includeBackboneRelational);
 
