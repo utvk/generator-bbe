@@ -19,10 +19,7 @@ ViewGenerator.prototype.askFor = function askFor() {
     warning: 'Yes: a template file will be placed into the templates directory.'
   }];
 
-  this.prompt(prompts, function(err, props) {
-    if (err) {
-      return this.emit('error', err);
-    }
+  this.prompt(prompts, function(props) {
 
     this.includeTemplateFile = (/y/i).test(props.includeTemplateFile);
 
