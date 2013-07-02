@@ -2,36 +2,36 @@
 
 require.config({
   shim: {
+    'bootstrap': {
+      deps: [
+        'jquery'
+      ],
+      exports: 'jquery'
+    },
     'underscore': {
       exports: '_'
     },
     'backbone': {
       deps: [
-        'underscore',
-        'jquery'
+        'jquery',
+        'underscore'
       ],
       exports: 'Backbone'
-    },
-    bootstrap: {
-      deps: ['jquery'],
-      exports: 'jquery'
     }<% if (includeBackboneRelational) { %>,
     'backbone-relational': ['backbone']<% } %>
   },
   paths: {
-    'jquery': '../components/jquery/jquery',<% if (includeBackboneRelational) { %>
-    'backbone': '../components/backbone/backbone',
+    'jquery': '../components/jquery/jquery',
+    'bootstrap': '../components/sass-bootstrap/docs/assets/js/bootstrap',
     'underscore': '../components/underscore/underscore',
-    'backbone-relational': '../components/backbone-relational/backbone-relational'<% }else{ %>
-    'backbone': '../components/backbone-amd/backbone',
-    'underscore': '../components/underscore-amd/underscore'<% } %>,
-    'bootstrap': '../components/sass-bootstrap/docs/assets/js/bootstrap'
+    'backbone': '../components/backbone/backbone'<% if (includeBackboneRelational) { %>,
+    'backbone-relational': '../components/backbone-relational/backbone-relational'<% } %>
   }
 });
 
 require([
   'backbone',
   'bootstrap'
-], function(Backbone) {
+], function(Backbone, Bootstrap) {
   Backbone.history.start();
 });
