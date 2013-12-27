@@ -24,8 +24,8 @@ Generator.prototype.askFor = function askFor() {
 
   var prompts = [{
     name: 'expressFileName',
-    message: 'What would you like to name your main express file?',
-    'default': 'app or server'
+    message: 'What would you like to name your main express file? (default=server)',
+    'default': 'server'
   }, {
     name: 'includeBackboneRelational',
     message: 'Would you like to include Backbone-Relational?',
