@@ -22,9 +22,9 @@ require.config({
   },
   paths: {
     'jquery': '../components/jquery/jquery',
-    'bootstrap': '../components/sass-bootstrap/docs/assets/js/bootstrap',
-    'underscore': '../components/underscore/underscore',
-    'backbone': '../components/backbone/backbone'<% if (includeBackboneRelational) { %>,
+    'bootstrap': '../components/sass-bootstrap/dist/js/bootstrap',
+    'underscore': '../components/underscore-amd/underscore',
+    'backbone': '../components/backbone-amd/backbone'<% if (includeBackboneRelational) { %>,
     'backbone-relational': '../components/backbone-relational/backbone-relational'<% } %>
   }
 });
