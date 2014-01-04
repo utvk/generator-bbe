@@ -75,5 +75,5 @@ Generator.prototype.scaffolding = function scaffolding() {
 Generator.prototype.baseFiles = function baseFiles() {
   this.template('_index.html', 'public/index.html');
   this.template('_main.js', 'public/js/main.js');
-  this.write('public/sass/main.scss', '@import "components/sass-bootstrap/lib/bootstrap";\n\n.hero-unit {\n  margin: 50px auto 0;\n  width: 300px;\n}\n');
+  this.template('main.scss', 'public/sass/main.scss');
 };
